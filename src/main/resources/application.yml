@@ -19,10 +19,10 @@ spring:
         use_sql_comments: false
 
 jwt:
-  secretKey: gdgVGhpcyBpcyBhIHZlcnkgc2ChOoJlIHNlY3JldCBrZXkgZm9yIEpXVCAoMzJiYnl0ZXMpIQ==  # ?? ?? ? (Base64 ???? ???)
-  accessExpiration: 21600000                       # 1?? (3600000 ???)
-  refreshExpiration: 604800000                     # 7? (604800000 ???)
-  aesKey: 1234567890123456                         # ?? AES ? (16???)
+  secretKey: gdgVGhpcyBpcyBhIHZlcnkgc2ChOoJlIHNlY3JldCBrZXkgZm9yIEpXVCAoMzJiYnl0ZXMpIQ==
+  accessExpiration: 21600000
+  refreshExpiration: 604800000
+  aesKey: 1234567890123456
 
 social:
   google:
