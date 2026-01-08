@@ -9,6 +9,7 @@ public record ProfileUpdateRequest(
         @NotBlank @Size(max = 50) String name,
         @Size(max = 100) String major,
         @Size(max = 500) String bio,
+        @Size(max = 500) String imageUrl,
         @Size(max = 30) List<@Size(max = 50) String> stacks
 ) {
 }

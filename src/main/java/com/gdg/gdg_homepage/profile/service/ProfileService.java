@@ -49,11 +49,11 @@ public class ProfileService {
     public ProfileResponse updateMyProfile(Long memberId, ProfileUpdateRequest req) {
         Profile profile = profileRepository.findByMemberId(memberId)
                 .orElseGet(() -> profileRepository.save(
-                        new Profile(memberId, req.name(), req.major(), req.bio(), null)
+                        new Profile(memberId, req.name(), req.major(), req.bio(), req.imageUrl())
                 ));
 
         // 프로필 기본 정보 업데이트 (dirty checking으로 반영)
-        profile.update(req.name(), req.major(), req.bio(), profile.getImageUrl());
+        profile.update(req.name(), req.major(), req.bio(), req.imageUrl());
 
         // stacks: 기존 삭제 후 재등록 (처음엔 이게 제일 안전)
         profileTechStackRepository.deleteAll(
