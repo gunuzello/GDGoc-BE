@@ -10,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,4 +37,9 @@ public class WebConfig implements WebMvcConfigurer {
 			.allowCredentials(true) // 자격 증명 허용 여부
 			.maxAge(3600); // preflight 요청 캐시 시간
 	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:uploads/");
+    }
 }
