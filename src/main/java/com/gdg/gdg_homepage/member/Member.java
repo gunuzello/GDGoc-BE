@@ -4,11 +4,13 @@ package com.gdg.gdg_homepage.member;
 import com.gdg.gdg_homepage.common.infrastructure.BaseEntity;
 
 
+import jakarta.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@Entity
 public class Member extends BaseEntity {
 
 	private final Long id;
