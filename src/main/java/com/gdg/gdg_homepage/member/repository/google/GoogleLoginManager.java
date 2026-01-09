@@ -29,7 +29,7 @@ public class GoogleLoginManager {
 
 	private String getRedirectUri(HttpServletRequest servletRequest) {
 		String serverName = servletRequest.getServerName();
-		return "http://localhost:3000/auth/social?provider=google";
+		return "http://localhost:3000/social/google";
 		// if (serverName.startsWith("localhost")) {
 		// } else if (serverName.startsWith("dev")) {
 		//
