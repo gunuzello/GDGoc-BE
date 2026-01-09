@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.gdg.gdg_homepage.common.exception.AuthException;
 import com.gdg.gdg_homepage.common.exception.ErrorCode;
-import com.gdg.gdg_homepage.member.Member;
+import com.gdg.gdg_homepage.member.repository.Member;
 import com.google.gson.JsonObject;
 
 
