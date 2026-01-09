@@ -15,6 +15,6 @@ public record ProfileResponse(
 		MemberRole memberRole
 ) {
     public static ProfileResponse empty() {
-        return new ProfileResponse("", null, "", "", null, List.of());
+        return new ProfileResponse("", null, "", "", null, List.of(),null);
     }
 }
