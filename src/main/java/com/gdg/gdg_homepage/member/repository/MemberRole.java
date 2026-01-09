@@ -1,4 +1,4 @@
-package com.gdg.gdg_homepage.member;
+package com.gdg.gdg_homepage.member.repository;
 
 import lombok.Getter;
 
