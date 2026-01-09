@@ -16,7 +16,8 @@ public class CorsConfig {
         // 허용할 도메인 추가
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",
-                "http://localhost:8080"
+                "http://localhost:8080",
+			"https://port-0-gdgoc-be-mk6fg8a664f60d0d.sel3.cloudtype.app"
         ));
         configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
         configuration.addAllowedHeader("*"); // 모든 헤더 허용

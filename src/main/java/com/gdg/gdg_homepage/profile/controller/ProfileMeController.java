@@ -3,7 +3,6 @@ package com.gdg.gdg_homepage.profile.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.gdg.gdg_homepage.common.util.SecurityUtil;
 import com.gdg.gdg_homepage.profile.dto.ProfileResponse;
 import com.gdg.gdg_homepage.profile.dto.ProfileUpdateRequest;
 import com.gdg.gdg_homepage.profile.service.ProfileService;
@@ -18,9 +17,8 @@ public class ProfileMeController {
 
     private final ProfileService profileService;
 
-    @GetMapping
-    public ResponseEntity<ProfileResponse> getMyProfile() {
-        Long memberId = SecurityUtil.getCurrentMemberId();
+    @GetMapping("/{memberId}")
+    public ResponseEntity<ProfileResponse> getMyProfile(@PathVariable Long memberId) {
         return ResponseEntity.ok(profileService.getMyProfile(memberId));
     }
 
@@ -28,7 +26,6 @@ public class ProfileMeController {
     public ResponseEntity<ProfileResponse> upsertMyProfile(
             @Valid @RequestBody ProfileUpdateRequest request
     ) {
-        Long memberId = SecurityUtil.getCurrentMemberId();
-        return ResponseEntity.ok(profileService.updateMyProfile(memberId, request));
+        return ResponseEntity.ok(profileService.updateMyProfile(request.memberId(), request));
     }
 }

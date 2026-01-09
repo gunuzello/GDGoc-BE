@@ -43,19 +43,6 @@ public class CommonRestControllerAdvice {
 	}
 
 
-	@ExceptionHandler(HttpServerErrorException.GatewayTimeout.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public ResponseEntity<ErrorResponse> handleGatewayTimeout(
-		HttpServerErrorException e, HandlerMethod method) {
-		log.error(
-			"GatewayTimeout 발생 method: {} ,\n{}", method.getMethod().getName(), e.getMessage(), e);
-
-		String detailMessage =
-			"이미지 생성 시간이 초과되었습니다\n" + "죄송합니다. 현재 서버가 혼잡하여 이미지 생성 요청이 완료되지 않았습니다. 잠시 후 다시 시도해 주시기 바랍니다.";
-
-		return ErrorResponse.createErrorResponseEntity(ErrorCode.SYSTEM_ERROR, detailMessage);
-	}
-
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException e) {

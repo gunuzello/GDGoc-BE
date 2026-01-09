@@ -60,20 +60,4 @@ public class MemberService {
 			savedMember
 		);
 	}
-
-	private String generateRandomPassword() {
-		// UUID를 사용하여 랜덤 문자열 생성
-		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-
-		// 추가적인 복잡성을 위해 랜덤 문자 추가
-		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-		StringBuilder sb = new StringBuilder(uuid.substring(0, 10));
-
-		SecureRandom random = new SecureRandom();
-		for (int i = 0; i < 6; i++) {
-			int index = random.nextInt(chars.length());
-			sb.append(chars.charAt(index));
-		}
-		return sb.toString();
-	}
 }

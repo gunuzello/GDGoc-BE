@@ -52,6 +52,9 @@ public class SwaggerConfig {
 
 			servers.add(
 				new Server().url("http://localhost:8080").description("Local Development Server"));
+		servers.add(
+			new Server().url("https://port-0-gdgoc-be-mk6fg8a664f60d0d.sel3.cloudtype.app").description("Production Development Server"));
+
 
 		return servers;
 	}

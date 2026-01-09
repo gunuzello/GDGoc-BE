@@ -1,10 +1,15 @@
 package com.gdg.gdg_homepage.profile.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gdg.gdg_homepage.common.exception.AuthException;
+import com.gdg.gdg_homepage.common.exception.ErrorCode;
+import com.gdg.gdg_homepage.member.repository.Member;
+import com.gdg.gdg_homepage.member.repository.MemberRepository;
 import com.gdg.gdg_homepage.profile.Profile;
 import com.gdg.gdg_homepage.profile.ProfileTechStack;
 import com.gdg.gdg_homepage.profile.dto.ProfileResponse;
@@ -21,18 +26,20 @@ public class ProfileService {
 
     private final ProfileRepository profileRepository;
     private final ProfileTechStackRepository profileTechStackRepository;
+	private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
     public ProfileResponse getMyProfile(Long memberId) {
-        return profileRepository.findByMemberId(memberId)
+		Optional<Member> findMember = memberRepository.findById(memberId);
+		if (findMember.isEmpty()) {throw new AuthException(ErrorCode.MEMBER_NOT_FOUND);
+		}
+		String email = findMember.get().getUsername();
+		return profileRepository.findByMemberId(memberId)
                 .map(profile -> {
                     List<String> stacks = profileTechStackRepository.findAll().stream()
                             .filter(s -> s.getProfile().getId().equals(profile.getId()))
                             .map(ProfileTechStack::getName)
                             .toList();
-
-                    // 구글 계정 이메일은 나중에 Member 쪽 repo 정리되면 붙이기
-                    String email = null;
 
                     return new ProfileResponse(
                             profile.getName(),
@@ -45,8 +52,12 @@ public class ProfileService {
                 })
                 .orElse(ProfileResponse.empty());
     }
-
+	@Transactional
     public ProfileResponse updateMyProfile(Long memberId, ProfileUpdateRequest req) {
+		Optional<Member> findMember = memberRepository.findById(memberId);
+		if (findMember.isEmpty()) {throw new AuthException(ErrorCode.MEMBER_NOT_FOUND);
+		}
+		String email = findMember.get().getUsername();
         Profile profile = profileRepository.findByMemberId(memberId)
                 .orElseGet(() -> profileRepository.save(
                         new Profile(memberId, req.name(), req.major(), req.bio(), req.imageUrl())
@@ -68,9 +79,6 @@ public class ProfileService {
                 profileTechStackRepository.save(new ProfileTechStack(profile, stack.trim()));
             }
         }
-
-        // 구글 계정 이메일은 나중에 Member 쪽 repo 정리되면 붙이기
-        String email = null;
 
         List<String> stacks = profileTechStackRepository.findAll().stream()
                 .filter(s -> s.getProfile().getId().equals(profile.getId()))

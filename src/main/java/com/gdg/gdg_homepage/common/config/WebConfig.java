@@ -33,13 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
 			.allowCredentials(Boolean.TRUE.equals(config.getAllowCredentials()))
 			.allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 HTTP 메서드 지정
 			.allowedHeaders("*") // 모든 헤더 허용
-			.exposedHeaders("X-Story-Title")
 			.allowCredentials(true) // 자격 증명 허용 여부
 			.maxAge(3600); // preflight 요청 캐시 시간
 	}
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:uploads/");
-    }
 }

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record ProfileUpdateRequest(
+	Long memberId,
         @NotBlank @Size(max = 50) String name,
         @Size(max = 100) String major,
         @Size(max = 500) String bio,
