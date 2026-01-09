@@ -39,4 +39,9 @@ public class Member extends BaseEntity {
 			.imageUrl(memberInfo.getImageUrl())
 			.build();
 	}
+
+	public Member changeMemberRole(MemberRole memberRole) {
+		this.memberRole = memberRole;
+		return this;
+	}
 }

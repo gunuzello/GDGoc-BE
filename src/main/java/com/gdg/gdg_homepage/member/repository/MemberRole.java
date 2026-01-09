@@ -7,6 +7,7 @@ public enum MemberRole {
 
     MEMBER("member"),
     CORE("core"),
+	DEVREL("devrel"),
     ORGANIZER("organizer");
 
     private final String role;
