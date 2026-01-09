@@ -47,7 +47,8 @@ public class ProfileService {
                             profile.getMajor(),
                             profile.getBio(),
                             profile.getImageUrl(),
-                            stacks
+                            stacks,
+						findMember.get().getMemberRole()
                     );
                 })
                 .orElse(ProfileResponse.empty());
@@ -84,14 +85,16 @@ public class ProfileService {
                 .filter(s -> s.getProfile().getId().equals(profile.getId()))
                 .map(ProfileTechStack::getName)
                 .toList();
+		Member savedMember = memberRepository.save(findMember.get().changeMemberRole(req.memberRole()));
 
-        return new ProfileResponse(
+		return new ProfileResponse(
                 profile.getName(),
                 email,
                 profile.getMajor(),
                 profile.getBio(),
                 profile.getImageUrl(),
-                stacks
+                stacks,
+			savedMember.getMemberRole()
         );
     }
 }
