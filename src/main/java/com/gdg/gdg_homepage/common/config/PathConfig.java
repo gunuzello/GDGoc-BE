@@ -13,7 +13,7 @@ public class PathConfig {
 			"/",
 			"/swagger-ui/**",
 			"/v3/api-docs/**",
-			"/member/**",
+			"/api/v1/member",
 			"/h2-console/**",
 		};
 	}
